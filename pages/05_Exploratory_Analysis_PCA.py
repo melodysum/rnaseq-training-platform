@@ -9,7 +9,8 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from utils.data_loader import init_session_data
-from utils.filtering import filter_low_expression, log_cpm, top_variable_genes
+from utils.filtering import filter_low_expression, log_cpm
+from utils.batch_effects import top_variable_genes
 from utils.pca_utils import run_pca, pca_plot_df
 from utils.exploration import (
     sample_correlation_matrix,
