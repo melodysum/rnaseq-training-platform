@@ -152,7 +152,7 @@ with col_left:
             "title": "Lesson 8 — Clustering & Heatmaps",
             "desc": "Learn how to cluster genes and samples, build expression heatmaps, and identify gene modules from DE results.",
             "page": "pages/08_Clustering_Heatmaps.py",
-            "available": False,
+            "available": True,
         },
         {
             "icon": "🧩",
