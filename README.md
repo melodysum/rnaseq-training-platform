@@ -149,9 +149,38 @@ For production-grade analysis, use:
 
 ---
 
+## 🔬 Why Single-Cell Analysis Is Not Fully Implemented
+
+Lesson 11 is an **introductory conceptual module only**. The following single-cell capabilities are not available in this web app, for the reasons explained below.
+
+| Capability | Why it is not implemented |
+|------------|--------------------------|
+| Cell-level QC (mitochondrial reads, doublet removal) | Requires per-cell barcode-level data in 10x Cell Ranger format, not CSV |
+| Single-cell normalisation (scran, SCTransform) | Specialised methods designed for sparse UMI count distributions; not interchangeable with bulk normalisation |
+| Highly variable gene (HVG) selection | Requires per-cell variance modelling across thousands of cells |
+| PCA / SNN graph on real scRNA-seq data | Matrices of 20,000 genes × 50,000 cells exceed browser memory limits (~1 GB on Streamlit Cloud) |
+| True UMAP on real single-cell matrices | Computationally intensive; real UMAP on large matrices takes minutes and would time out in a web app |
+| Leiden / Louvain graph-based clustering | Requires `leidenalg` and `igraph`, which are complex C-extension dependencies incompatible with simple Streamlit deployment |
+| Cluster-level differential expression | Depends on completed clustering; not meaningful without real cell-type assignments |
+| Cell-type annotation from marker genes | Requires a reference atlas or curated marker database not bundled with this app |
+| Multi-sample integration (Harmony, scVI, Seurat CCA) | Requires GPU or large-memory server; scVI depends on PyTorch |
+| Trajectory / pseudotime analysis (Monocle, scVelo) | Requires RNA velocity or pseudotime-specific data structures beyond count matrices |
+| AnnData (.h5ad) / Seurat (.rds) file support | Binary HDF5 formats; files are typically several GB and cannot be uploaded via browser |
+| 10x Cell Ranger output parsing | Requires reading sparse matrix market format (barcodes / features / matrix triplet), not CSV |
+
+**In short:** scRNA-seq analysis requires specialised file formats, large memory (8–64 GB RAM), complex library dependencies, and sometimes GPU resources. These constraints make it unsuitable for a lightweight browser-based teaching app.
+
+**For real single-cell analysis, use:**
+- [Scanpy](https://scanpy.readthedocs.io/) (Python) — standard single-cell toolkit
+- [Seurat](https://satijalab.org/seurat/) (R) — widely used in the field
+- [Bioconductor scran / scater](https://bioconductor.org/books/release/OSCA/) (R) — rigorous statistical framework
+- Run on a local machine with ≥16 GB RAM, or on an HPC cluster
+
+---
+
 ## 🗺️ Roadmap / Future Extensions
 
-- Lesons 12+: trajectory analysis concepts, multi-omics integration overview
+- Lessons 12+: trajectory analysis concepts, multi-omics integration overview
 - Real GO/KEGG enrichment via offline MSigDB GMT file support
 - DESeq2-style negative binomial modelling (via rpy2 or pydeseq2)
 - Better support for multi-group / multi-factor designs
