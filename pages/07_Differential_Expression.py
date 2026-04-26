@@ -37,7 +37,7 @@ with st.sidebar:
     # Gene set
     if filter_res:
         counts_use = filter_res["counts_filtered"]
-        st.caption(f"Using {len(counts_use):,} filtered genes (Lesson 1).")
+        st.caption(f"Using {len(counts_use):,} filtered genes (Lesson 3).")
     else:
         counts_use = filter_low_expression(counts_raw, 10, 5)
         st.caption(f"Using {len(counts_use):,} genes (default filter).")
@@ -90,7 +90,7 @@ with col_b:
     st.info("""
 **The DE workflow in this lesson:**
 
-1. Filter low-expression genes (Lesson 1)
+1. Filter low-expression genes (Lesson 3)
 2. Normalise to log-CPM
 3. Optional: adjust for batch effects
 4. Gene-wise t-test between groups
