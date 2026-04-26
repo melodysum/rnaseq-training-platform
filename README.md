@@ -6,6 +6,29 @@ An interactive, step-by-step Streamlit web application for learning RNA-seq data
 
 ---
 
+## 📋 Update Log
+
+### v2.0 — 2026-04-27
+
+**New utility modules**
+
+- `utils/stats_utils.py` — Standardised DE output schema enforced across all pages; inline comments explaining p-value vs FDR and why multiple testing correction is required
+- `utils/kallisto_import.py` — Kallisto pseudo-alignment output → gene-level integer count matrix (length-scaled TPM method, mirrors tximport); bridges the gap between pseudo-alignment workflows and count-based models (DESeq2 / edgeR)
+
+**Extended existing modules** *(all original functions preserved)*
+
+- `utils/filtering.py` — Added `filter_by_expr()` (edgeR filterByExpr-equivalent: threshold derived from library sizes and group sizes, not DE signal) and `threshold_sweep_retained()` (diagnostic sweep of retained gene counts across thresholds — no circularity)
+- `utils/pca_utils.py` — Added `variance_decomposition()` (PVCA-like: quantifies % variance explained by batch, condition, and other covariates using weighted partial R²)
+- `utils/enrichment_utils.py` — Added `rank_by_statistic()` (gene ranking by test statistic for GSEA) and `run_gsea_permutation()` (proper GSEA with gene-label permutation, NES normalisation, permutation p-values, and BH-FDR)
+
+**Updated pages** *(all original sections preserved)*
+
+- **Lesson 3 — Filtering**: New section "Data-Driven Threshold (filterByExpr Method)" — explains why optimising threshold by DE signal is circular reasoning; shows genes-retained vs threshold diagnostic plot
+- **Lesson 5 — Exploratory Analysis & PCA**: New section "Variance Decomposition" — factor contribution bar chart and table; guides batch correction decision
+- **Lesson 9 — Functional Enrichment**: New section "Advanced GSEA with Permutation Testing & NES" — permutation-based NES, p-values, FDR; ORA vs GSEA comparison table; NES bar chart
+
+---
+
 ## 🚀 Getting Started
 
 ### Run locally
