@@ -333,6 +333,18 @@ to the noise structure of your specific dataset.
 group sizes — completely independent of DE results.
 """)
 
+
+with st.expander("The statistical principle behind filterByExpr", expanded=False):
+    st.markdown(
+        "filterByExpr keeps only genes expressed at a level where statistical testing is meaningful. "
+        "It judges each gene on two dimensions: (1) CPM threshold scaled by median library size, "
+        "and (2) sample support: the gene must exceed the CPM threshold in at least min_group_size samples. "
+        "Naive count filters ignore library size and experimental design. "
+        "Low-count genes cause variance inflation in negative binomial models, inflating logFC and making p-values unreliable. "
+        "Filtering also reduces the multiple testing burden: fewer genes tested means a lower FDR correction penalty "
+        "and higher statistical power for the genes that remain."
+    )
+
 col_fe1, col_fe2 = st.columns(2)
 with col_fe1:
     fe_min_count = st.slider(
