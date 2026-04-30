@@ -331,16 +331,17 @@ else:
             "Results are illustrative only."
         )
     else:
-        st.info(
-            f"ℹ️ Using **{gs_display_name}**. "
-            "If no pathway passes FDR < 0.05, this is likely because the current "
-            "demo data is simulated and does not contain real biological signal "
-            "designed to enrich these pathways. "
-            "For biologically meaningful results, upload real experimental data "
-            "(e.g. TB dataset GSE167232). "
-            "This does **not** indicate a code error."
-        )
-        with st.expander("📖 Why are there no significant pathways? — Statistical explanation", expanded=False):
+        if source == "demo":
+            st.info(
+                f"ℹ️ Using **{gs_display_name}**. "
+                "If no pathway passes FDR < 0.05, this is likely because the current "
+                "demo data is simulated and does not contain real biological signal "
+                "designed to enrich these pathways. "
+                "For biologically meaningful results, upload real experimental data "
+                "(e.g. TB dataset GSE167232). "
+                "This does **not** indicate a code error."
+            )
+        with st.expander("📖 Why are there no significant pathways? — Statistical explanation", expanded=False) if source == "demo" else st.empty():
             st.markdown("""
 **What ORA does**
 
