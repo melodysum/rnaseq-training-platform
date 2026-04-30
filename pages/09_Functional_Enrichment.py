@@ -340,6 +340,32 @@ else:
             "(e.g. TB dataset GSE167232). "
             "This does **not** indicate a code error."
         )
+        with st.expander("📖 Why are there no significant pathways? — Statistical explanation", expanded=False):
+            st.markdown("""
+**What ORA does**
+
+ORA uses Fisher's exact test to ask:
+> *Are genes from this pathway appearing in my DE gene list more often than expected by chance?*
+
+**Why results may not be significant with real databases**
+
+When using MSigDB Hallmark or C2:CP with the demo data:
+
+- The demo dataset has **1,038 significant DE genes** (padj < 0.05, |log2FC| >= 1)
+- Of these, only **~246 genes** can be matched to Hallmark pathways
+- These 246 matched genes are **scattered across many pathways** — none is concentrated enough in a single pathway to produce a statistically significant overlap
+- After Benjamini-Hochberg FDR correction across all tested pathways, all adjusted p-values exceed 0.05
+
+**The core reason**
+
+The demo data is **randomly simulated**. Its DE genes do not represent any real biological process, so they do not cluster in any real biological pathway.
+
+MSigDB Hallmark and C2:CP are **real curated databases** that require genuine biological signal to produce enrichment. They will not force a significant result when there is none.
+
+**What to expect with real data**
+
+When you upload a real experimental dataset (e.g. TB dataset GSE167232), pathways such as HALLMARK_INTERFERON_GAMMA_RESPONSE or REACTOME_INTERFERON_SIGNALING should show clear, significant enrichment.
+            """)
 
 st.divider()
 
