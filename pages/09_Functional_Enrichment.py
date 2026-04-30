@@ -173,6 +173,12 @@ try:
             f"🧬 **{gs_display_name}** — {n_gs:,} gene sets loaded from local GMT file."
         )
         if gs_key == "c2cp":
+            st.warning(
+                "⏳ **C2:CP contains 4,115 gene sets.** ORA and GSEA analysis may take "
+                "30-60 seconds to complete. Please be patient. "
+                "Use the prefix filter below to focus on a subset (e.g. REACTOME_) "
+                "for faster results."
+            )
             filter_prefix = st.text_input(
                 "Filter pathways by prefix (optional)",
                 value="",
