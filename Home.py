@@ -266,6 +266,14 @@ D01_treatment, treatment, D01,   batch1, F,   37
         """)
         st.info("Input must be **raw counts**, not TPM/FPKM/CPM. Normalised values will cause validation errors or incorrect results.", icon="⚠️")
 
+        st.info(
+            "🔄 **If results do not update after uploading new files, clear the app cache.** "
+            "Mac: Cmd + Shift + R  |  Windows: Ctrl + Shift + R  |  "
+            "Or click the menu (top-right) and select Clear cache. "
+            "Use this when: (1) you uploaded new data but the app still shows old results, "
+            "or (2) analysis outputs look unexpected. Clearing the cache forces everything to recompute."
+        )
+
         counts_file   = st.file_uploader("Upload counts.csv",   type="csv", key="upload_counts")
         metadata_file = st.file_uploader("Upload metadata.csv", type="csv", key="upload_meta")
 
