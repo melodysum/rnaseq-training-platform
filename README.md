@@ -40,6 +40,7 @@ An interactive, step-by-step Streamlit web application for learning RNA-seq data
 - Added loading time warning when C2:CP is selected (4,115 gene sets; 30-60s expected runtime)
 - Added Clear Cache tip to the file upload section on the Home page (Mac: Cmd+Shift+R, Windows: Ctrl+Shift+R)
 - ORA demo-data warning and statistical explanation now hidden automatically when real data is uploaded
+- Added statistical principle expander to Lesson 3 explaining the logic behind filterByExpr (CPM scaling, sample support, variance inflation, FDR burden)
 
 ### v2.0 — 2026-04-27
 
