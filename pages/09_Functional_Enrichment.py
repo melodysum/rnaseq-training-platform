@@ -319,10 +319,21 @@ else:
                       annotation_text="padj = 0.05")
     fig_ora.update_layout(height=400)
     st.plotly_chart(fig_ora, use_container_width=True)
-    st.caption(
-        "⚠️ These are educational toy pathways, not a real GO or KEGG database. "
-        "Results are illustrative only."
-    )
+    if gs_key == "toy":
+        st.caption(
+            "⚠️ These are educational toy pathways, not a real GO or KEGG database. "
+            "Results are illustrative only."
+        )
+    else:
+        st.info(
+            f"ℹ️ Using **{gs_display_name}**. "
+            "If no pathway passes FDR < 0.05, this is likely because the current "
+            "demo data is simulated and does not contain real biological signal "
+            "designed to enrich these pathways. "
+            "For biologically meaningful results, upload real experimental data "
+            "(e.g. TB dataset GSE167232). "
+            "This does **not** indicate a code error."
+        )
 
 st.divider()
 
