@@ -8,6 +8,35 @@ An interactive, step-by-step Streamlit web application for learning RNA-seq data
 
 ## 📋 Update Log
 
+### v2.1 — 2026-04-30
+
+**Lesson 9 — Real Pathway Database Support**
+
+*Purpose:* The previous implementation used toy gene sets that were educationally useful but biologically meaningless. This update enables real, validated pathway enrichment analysis using MSigDB curated gene sets, making Lesson 9 suitable for genuine biological interpretation — not just concept demonstration.
+
+- Added MSigDB gene-set selector in Lesson 9 (radio button: Toy / Hallmark / C2:CP)
+- Added parse_gmt() and load_gene_sets() to utils/enrichment_utils.py — parses local MSigDB GMT files into gene-set dictionaries
+- Added detect_gene_id_format() — automatically detects whether input genes are HGNC symbols or Ensembl IDs and warns the user if MSigDB matching may fail
+- Bundled two MSigDB GMT files in data/gene_sets/:
+
+  h.all.v2026.1.Hs.symbols.gmt — MSigDB Hallmark Gene Sets
+  - What it is: A curated collection of 50 gene sets, each representing a specific, well-defined biological state or process (e.g. interferon response, inflammatory response, oxidative phosphorylation, hypoxia). Hallmark gene sets were computationally derived by identifying overlaps across thousands of gene sets in other MSigDB collections, retaining only genes that show coordinate expression. The result is a compact, low-redundancy library.
+  - Why this one: Hallmark is the standard starting point for RNA-seq enrichment analysis. Its small size (50 pathways) makes ORA and GSEA fast and results easy to interpret — ideal for teaching and for initial biological exploration of a dataset. It is widely used in TB and immunology research.
+  - Source: Broad Institute Molecular Signatures Database (MSigDB), Human Collection H. msigdb.org
+  - Version: v2026.1.Hs (Human, HGNC gene symbols)
+  - Downloaded: 2026-04-30
+
+  c2.cp.v2026.1.Hs.symbols.gmt — MSigDB C2:CP Canonical Pathways
+  - What it is: A collection of 4115 gene sets representing canonical biological pathways curated from established pathway databases. The C2:CP subcollection includes pathways from: Reactome (1839 sets, detailed mechanistic pathways), WikiPathways (925 sets, community-curated), KEGG MEDICUS (658 sets, metabolic and signalling pathways), BioCarta (292 sets), and PID (196 sets). Unlike Hallmark, C2:CP pathways are sourced directly from expert-curated pathway databases rather than derived computationally from expression data.
+  - Why this one: C2:CP provides mechanistic depth that Hallmark does not. While Hallmark tells you interferon response is active, C2:CP can distinguish specifically which sub-pathway is enriched — e.g. REACTOME_INTERFERON_GAMMA_SIGNALING vs REACTOME_INTERFERON_ALPHA_BETA_SIGNALING. This resolution matters for TB research where precise pathway identification has direct biological and clinical relevance. The prefix filter in the UI allows focusing on a single source (e.g. REACTOME_ only) to avoid cross-database redundancy.
+  - Source: Broad Institute Molecular Signatures Database (MSigDB), Human Collection C2, subcollection CP. msigdb.org
+  - Version: v2026.1.Hs (Human, HGNC gene symbols)
+  - Downloaded: 2026-04-30
+
+- C2:CP mode includes a prefix filter (e.g. REACTOME_, KEGG_, WP_) to focus on a subset without code changes
+- All existing ORA, GSEA-like, and permutation GSEA sections now use the selected database
+- Toy gene sets remain available and are clearly labelled as educational only
+
 ### v2.0 — 2026-04-27
 
 **New utility modules**
