@@ -36,6 +36,9 @@ An interactive, step-by-step Streamlit web application for learning RNA-seq data
 - C2:CP mode includes a prefix filter (e.g. REACTOME_, KEGG_, WP_) to focus on a subset without code changes
 - All existing ORA, GSEA-like, and permutation GSEA sections now use the selected database
 - Toy gene sets remain available and are clearly labelled as educational only
+- Added diagnostic note explaining why no pathways may pass FDR < 0.05 when using real databases with demo data (expected behaviour, not a code error)
+- Added loading time warning when C2:CP is selected (4,115 gene sets; 30-60s expected runtime)
+- Added Clear Cache tip to the file upload section on the Home page (Mac: Cmd+Shift+R, Windows: Ctrl+Shift+R)
 
 ### v2.0 — 2026-04-27
 
