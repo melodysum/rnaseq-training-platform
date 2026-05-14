@@ -538,8 +538,7 @@ are near the top of the ranked list and correctly identifies the pathway.
 """)
 
 with st.spinner("Running differential expression for GSEA ranking…"):
-    de_for_gsea = run_de(counts, metadata, fdr_cutoff=0.05, lfc_cutoff=0.5)
-
+    de_for_gsea = st.session_state.get("de_results") or run_de(counts, metadata, fdr_cutoff=0.05, lfc_cutoff=0.5)
 # Add a 'stat' column (t-statistic approximation) for ranking
 if "stat" not in de_for_gsea.columns:
     de_for_gsea["stat"] = de_for_gsea["log2FC"] / (
