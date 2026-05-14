@@ -53,9 +53,9 @@ with st.sidebar:
     st.divider()
 
     # Optional covariates
-    has_batch = "batch" in metadata.columns
+    has_batch = "batch" in metadata.columns and metadata["batch"].nunique() > 1
     has_donor = "donor" in metadata.columns
-    use_batch = st.checkbox("Adjust for batch", value=False,
+    use_batch = st.checkbox("Adjust for batch", value=has_batch,
                              disabled=not has_batch,
                              help="Requires a 'batch' column in metadata.")
 
